@@ -14,6 +14,7 @@ namespace FSUIPCSharp
         public Speeds Speeds { get; private set; }
         public Altitudes Altitudes { get; private set; }
         public Autopilot Autopilot { get; private set; }
+        public FlightControls Controls { get; private set; }
 
         private Fsuipc connect;
         private bool isconnected;
@@ -36,6 +37,7 @@ namespace FSUIPCSharp
             Speeds = new Speeds(this);
             Altitudes = new Altitudes(this);
             Autopilot = new Autopilot(this);
+            Controls = new FlightControls(this);
 
         }
 
@@ -92,6 +94,30 @@ namespace FSUIPCSharp
             Int32 value = -1;
 
             connect.FSUIPC_Get(ref token, ref value);
+
+            return value;
+        }
+
+        public double readFloat(int offset)
+        {
+            if (!isconnected)
+                throw new Exception("Not connected to the Simulator!");
+
+            if (reqCount > 1000)
+                reconnect();
+            else
+                reqCount++;
+
+            int result = -1;
+            int token = -1;
+
+            connect.FSUIPC_Read(offset, 8, ref token, ref result);
+            connect.FSUIPC_Process(ref result);
+            double value = -1;
+            byte[] rawValue = new byte[8];
+            connect.FSUIPC_Get(ref token,8, ref rawValue);
+
+            value = BitConverter.ToDouble(rawValue, 0);
 
             return value;
         }

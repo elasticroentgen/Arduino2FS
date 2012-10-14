@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="Altitudes.cs" />
     <Compile Include="Autopilot.cs" />
+    <Compile Include="FlightControls.cs" />
     <Compile Include="FSInterface.cs" />
     <Compile Include="fsuipc.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

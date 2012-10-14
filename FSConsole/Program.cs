@@ -21,13 +21,16 @@ namespace FSConsole
                 Console.Clear();
                 Console.WriteLine("Altitude: " + fs.Altitudes.Altimeter + "ft (" + fs.Altitudes.AltimeterPressure +")");
                 Console.WriteLine("IAS/TAS/GS :" + fs.Speeds.ToString());
+                Console.WriteLine("Rudder trim :" + fs.Controls.RudderTrim);
+                Console.WriteLine("Elevator trim :" + fs.Controls.ElevatorTrim);
+                Console.WriteLine("Aileron trim :" + fs.Controls.AileronTrim);
 
                 Console.WriteLine(" == AUTOPILOT ==");
                 Console.WriteLine("ALT : " + fs.Autopilot.Altitude);
                 Console.WriteLine("SPD : " + fs.Autopilot.Speed);
                 Console.WriteLine("HDG : " + fs.Autopilot.Heading);
 
-                Thread.Sleep(200);
+                Thread.Sleep(500);
 
                 //hdg++;
                 //fs.Autopilot.Altitude = hdg;
